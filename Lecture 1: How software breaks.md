@@ -1,9 +1,12 @@
 - [Part 1: Terminology](#part-1-terminology)
-
+- [Part 2: A very quick demo of binary exploitation](#part-2-a-very-quick-demo-of-binary-exploitation)
+- [Part 3: ]
+- [Part 4: ]
 
 
 
 #### Part 1: Terminology
+
   * Understanding how software typically breaks is a requirement for successful secure design.
   * A way software can break is known as a weakness. A single security issue is known as a vulnerability. The weakness is exploited via one or more vulnerabilities. (Often the necessary software and activities required is called an exploit.) When you fix a security issue, you fix a vulnerability or you redesign the system not to exhibit the weakness.
   * In practice, only exploitable vulnerabilities matter. There can be weaknesses and vulnerabilities that cannot be exploited. Hence, the existence of a vulnerability is not always a proof of exploitability.
@@ -58,8 +61,8 @@ Note: This also immediately leads to discussion of how exploitable vulnerabiliti
  * Hence, we need to do slight trickery, and use a method called a ‘trampoline’. Here, after the overflow and when returning from the function, the stack pointer (which points at the top of the stack) actually points to our exploit code. If we now overwrite the return address with an address that points to the text segment, into a place that translates into a jump into wherever the stack pointer is pointing (“JMP ESP”), we can always start executing our payload irrespective of the specific address it ended up in.
  * Another way to make the exploit more reliable is to pad it with “NOP sleds”, series of “No Operation” opcodes, and try to get the IP to land somewhere inside the NOP sled.
 
- Stack frames. A normal stack frame on the left, exploit code below the return address in the center, and exploit code above the return address on the right.
- This fairly simple (by modern standards) attack is becoming harder. There are various architectural aspects that contribute:
+ * Stack frames. A normal stack frame on the left, exploit code below the return address in the center, and exploit code above the return address on the right.
+ * This fairly simple (by modern standards) attack is becoming harder. There are various architectural aspects that contribute:
  Stack and heap areas should not contain executable code. On modern processors, it is possible to define these memory areas as “non-executable” (NX, XN (“eXecute Never”), XD (“eXecute Disable”). The feature is enabled by DEP (“Data Execution Prevention”) on Windows. If the processor is told to jump to stack, and start executing attacker code there, the process will be terminated.
  So called stack canaries or stack cookies are values that are written on the stack with (i.e., before) the return address, and their integrity is checked when returning. If an attacker mistakenly overwrites a stack canary, the process is terminated.
  NX can be countered by the attacker through Return Oriented Programming (ROP). In this model, there is no executable code in a non-executable memory section. Instead, the attacker overwrites the stack with a series of return addresses, each jumping back to the main binary or one of the loaded dynamic libraries (hence sometimes also known as “Return-to-libc”).
