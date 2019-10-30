@@ -34,14 +34,17 @@
  * The following picture shows an example process layout widely shown in literature. To see a real one on Windows, use VMMap (sysinternals), on Linux, /proc/PID/maps.
 
 A simplified image of a process memory layout
-(https://wiki.aalto.fi/download/thumbnails/133894980/procmem.png?version=1&modificationDate=1523310974537&api=v2)
+
+![](images/procmem.png)
 
  * The processor has a register called the Instruction Pointer (which we denote by IP; do not confuse with Internet Protocol). This points to the memory address of the binary opcode to be executed by the processor.
  * When the binary performs a jump to a function, the operating system places the call parameters on the stack, followed by the current IP. When the function ends in a return opcode, the previous IP value (return address, below) is popped from the stack, and execution continues from there.
  * Also the location of the previous stack frame (“frame pointer”) is stored, and after that, memory is allocated for any local automatic variables declared in the function we just entered.
  * The stack is a collection of these stack frames. The current function is at the top of the stack (i.e., the bottommost frame in the picture).
 
+![](stackframe.png)
 A more detailed look at a stack frame
+
 Demo: We explain this all by conducting simple stack-based old-school buffer overflow exploitation on Linux. For the demo, we are using a legacy 32-bit Linux with OS’ anti-exploitation mechanisms turned off.
 
 Note: This also immediately leads to discussion of how exploitable vulnerabilities can be made non-exploitable through other design strategies, and again the cat-and-mouse game of how those design strategies get bypassed.
