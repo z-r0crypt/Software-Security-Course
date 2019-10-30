@@ -1,7 +1,8 @@
+<!-- https://wiki.aalto.fi/pages/viewpage.action?pageId=133894980 -->
 - [Part 1: Terminology](#part-1-terminology)
 - [Part 2: A very quick demo of binary exploitation](#part-2-a-very-quick-demo-of-binary-exploitation)
-- [Part 3: ]
-- [Part 4: ]
+- [Part 3: Discovering input processing problems with a fuzzer]
+- [Part 4: Advanced Fuzzing Topics]
 
 
 
