@@ -42,7 +42,7 @@ A simplified image of a process memory layout
  * Also the location of the previous stack frame (“frame pointer”) is stored, and after that, memory is allocated for any local automatic variables declared in the function we just entered.
  * The stack is a collection of these stack frames. The current function is at the top of the stack (i.e., the bottommost frame in the picture).
 
-![](stackframe.png)
+![](images/stackframe.png)
 A more detailed look at a stack frame
 
 Demo: We explain this all by conducting simple stack-based old-school buffer overflow exploitation on Linux. For the demo, we are using a legacy 32-bit Linux with OS’ anti-exploitation mechanisms turned off.
