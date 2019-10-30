@@ -61,7 +61,8 @@ A more detailed look at a stack frame
    + Hence, we need to do slight trickery, and use a method called a ‘trampoline’. Here, after the overflow and when returning from the function, the stack pointer (which points at the top of the stack) actually points to our exploit code. If we now overwrite the return address with an address that points to the text segment, into a place that translates into a jump into wherever the stack pointer is pointing (“JMP ESP”), we can always start executing our payload irrespective of the specific address it ended up in.
    + Another way to make the exploit more reliable is to pad it with “NOP sleds”, series of “No Operation” opcodes, and try to get the IP to land somewhere inside the NOP sled.
 
-![](images/post-sploit-frames.png) Stack frames. A normal stack frame on the left, exploit code below the return address in the center, and exploit code above the return address on the right.
+![](images/post-sploit-frames.png) 
+Stack frames. A normal stack frame on the left, exploit code below the return address in the center, and exploit code above the return address on the right.
  * This fairly simple (by modern standards) attack is becoming harder. There are various architectural aspects that contribute:
    + Stack and heap areas should not contain executable code. On modern processors, it is possible to define these memory areas as “non-executable” (NX, XN (“eXecute Never”), XD (“eXecute Disable”). The feature is enabled by DEP (“Data Execution Prevention”) on Windows. If the processor is told to jump to stack, and start executing attacker code there, the process will be terminated.
    + So called stack canaries or stack cookies are values that are written on the stack with (i.e., before) the return address, and their integrity is checked when returning. If an attacker mistakenly overwrites a stack canary, the process is terminated.
